@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Phase 3 Search Engine Admin</title>
+
+	<!--The W3 Schools CSS framework for responsiveness-->
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"> 
+	
+	<link rel="stylesheet" href="style.css"> <!--This links to the style sheet -->
+	<script src="siteScripts.js"></script>   <!--This links to the javascript code-->
+	
+
+	<!--Loads jquery library -->
+	<script
+		src="https://code.jquery.com/jquery-3.3.1.min.js"
+		integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+		crossorigin="anonymous">
+	</script>
+
+</head>
+
+
+<body>
+	<h1>Phase 3 Search Engine Admin Page</h1>
+	
+	<div id="nBar"></div>
+		
+		<!--Script to load navigation bar using jQuery into above div-->
+		<script>
+			$("#nBar").load("topnavbar.html");
+		</script>
+		<br>
+		
+		<form method="post" action="searchEngineAdmin.php">
+			URL: <input type="text" id="urlSubmit" name="urlSubmit">
+			<input type="submit" value="Submit">
+		</form>
+		
+		
+		
+		<!--
+		<button type="button" onClick="">Submit</button>
+		<br>
+		
+		<input type="checkbox" id="caseSensitive">Case sensitive<br>
+		<input type="checkbox" id="allow partial match">Allow partial match<br>
+		-->
+		
+</body>
+
+</html>
