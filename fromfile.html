@@ -1,0 +1,201 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav>
+        <div class="logoHeader">
+            <h1>SARA</h1>
+        </div>
+        <ul class="navLinks">
+            <li><a href="index.html">Home</a></li>
+            <li>
+                <a href="#srch">Search</a>
+                <ul>
+                    <li><a href="fromfile.html">From File</a></li>
+                    <li><a href="googleapi.html">From Google API</a></li>
+                    <li><a>SARA Search</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="courses.html">Course</a>
+                <ul>
+                    <li><a href="https://learn.zybooks.com/zybook/CUNYCSCI355TeitelmanFall2019">Zybook</a></li>
+                    <li><a href="https://www.tophat.com">Tophat</a></li>
+                    <li><a href="https://drive.google.com/drive/folders/1AsHhIFfQ3yNE_m2z4wswRfKh77K0UH9w">Google Drive</a></li>
+                    <li><a href="https://www.w3schools.com">W3Schools</a></li>
+                </ul>
+            </li>
+
+            <li>
+                <a href="about.html">About</a>
+                <ul>
+                    <li><a href="mailto:jmurp922@gmail.com">Contact Us</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#browser">Browser</a>
+                <ul>
+                    <li><a href="#navigator">Navigator</a></li>
+                    <li><a href="#window">Window</a></li>
+                    <li><a href="#screen">Screen</a></li>
+                    <li><a href="#location">Location</a></li>
+                    <li><a href="#geolocation">Geolocation</a></li>
+                </ul>
+            </li>
+        </ul>
+        <div></div>
+        <div></div>
+        <div class="burger">
+            <div class="1"></div>
+            <div class="2"></div>
+            <div class="3"></div>
+        </div>
+    </nav>
+    <div class="main">
+        <center>
+            <h2>File Upload</h2>
+            <input type="radio" name="files" value="Json" id="json">
+            <label for="json">JSON</label>
+            <input type="radio" name="files" value="CSV" id="csv">
+            <label for="csv">CSV</label>
+            <input type="radio" name="files" value="XML" id="xml">
+            <label for="xml">XML</label><br /><br />
+            <form id="form">
+                <input id="fileUpload" name="fileUpload" type="file">
+                <button id="submit">Upload</button>
+            </form>
+            <br />
+            <h2>Download</h2>
+            <br />
+            <input type="radio" name="filesdl" value="Jsondl" id="jsondl">
+            <label for="jsondl">JSON Download</label>
+            <input type="radio" name="filesdl" value="CSVdl" id="csvdl">
+            <label for="csvdl">CSV Download</label>
+            <input type="radio" name="filesdl" value="XMLdl" id="xmldl">
+            <label for="xmldl">XML Download</label> <br /> <br />
+            <button id="download" onclick="download()">Download File</button>
+            <br />
+            <a id="anchor" class="anchor"></a><a id="jsonanchor"></a><a id="xmlanchor"></a><a id="csvanchor"></a><br />
+            <p id="demo"></p>
+            <div id="output">
+                <section></section>
+            </div>
+        </center>
+    </div>
+    <script>
+        function download() {
+            var b = document.getElementById('anchor');
+            b.download = "export.html";
+            b.href = "data:text/html," + document.getElementById("output").innerHTML;
+            b.innerHTML = "[HTML FILE]";
+            if (document.getElementById('jsondl').checked == true) {
+                var json = document.getElementById('jsonanchor');
+                json.download = "export.json";
+                json.href = "data:text/html," + document.getElementById("output").innerHTML;
+                json.innerHTML = "[JSON FILE]";
+            }
+            else if (document.getElementById('csvdl').checked == true) {
+                var csv = document.getElementById('csvanchor');
+                csv.download = "export.csv";
+                csv.href = "data:text/html," + document.getElementById("output").innerHTML;
+                csv.innerHTML = "[CSV FILE]";
+            }
+            else if (document.getElementById('xmldl').checked == true) {
+                var xml = document.getElementById('xmlanchor');
+                xml.download = "export.xml";
+                xml.href = "data:text/html," + document.getElementById("output").innerHTML;
+                xml.innerHTML = "[XML FILE]";
+            }
+        }
+        /*
+        var a = document.body.appendChild(document.createElement("a"));
+        a.download = "export.html";
+        a.href = "data:text/html," + document.getElementById("output").innerHTML;
+        console.log(a);
+        var b = document.getElementById('output');
+        b.innerHTML = "[Export content]";
+        a.innerHTML = "[Export Content]";
+        */
+        document.addEventListener("DOMContentLoaded", () => {
+            var form = document.getElementById("form");
+            var output = document.getElementById("output");
+            var content = "";
+            form.addEventListener("submit", (event) => {
+                event.preventDefault();
+                var files = event.target.fileUpload.files[0];
+                var reader = new FileReader();
+                reader.addEventListener("load", () => {
+                    if (document.getElementById('json').checked == true) {
+                        var jsonFile = "JSON File Uploaded!";
+                        document.getElementById('demo').innerHTML = jsonFile;
+                        var parsedJson = JSON.parse(reader.result);
+                        var result = parsedJson.Result;
+                        result.map((data) => {
+                            var title = data.title;
+                            var url = data.url;
+                            var description = data.description;
+                            content += title + "<p>" + "<a href='" + url + "' target='_blank' >" + url + "</a></p>" + "<p>" + description + "</p>";
+                        });
+                        output.innerHTML = content;
+                        download();
+                    }
+                    else if (document.getElementById('xml').checked == true) {
+                        var xmlFile = "XML File Uploaded!";
+                        document.getElementById('demo').innerHTML = xmlFile;
+                        let xmlContent = '';
+                        let xmlFin = '';
+                        let xmlOutput = document.getElementById('demo');
+                        fetch(reader.result).then((response) => {
+                            response.text().then((xml) => {
+                                let parser = new DOMParser()
+                                let xmlDOM = parser.parseFromString(xmlContent, text / XMLDocument);
+                                let title = xmlDOM.querySelectorAll('title');
+                                let url = xmlDOM.querySelectorAll('url');
+                                let description = xmlDOM.querySelectorAll('description');
+                                xmlFin += title + url + description;
+                                output.innerHTML = xmlFin;
+                            })
+                        });
+                    }
+                    else if (document.getElementById('csv').checked == true) {
+                        var csvFile = "CSV File Uploaded!";
+                        document.getElementById('demo').innerHTML = csvFile;
+                        reader.readAsText(files);
+                        let data = files.event.Result;
+                        /*
+                        let duh = data.split(/\r\n|\n);
+                        for (let i = 0; i < duh.length; i++) {
+                            let row = duh[i].split(';');
+                            let col = [];
+                            for (let j = 0; j < row.length; j++) {
+                                col.push(row[j]);
+                            }
+                            csvArray.push(col);
+                        }
+                        output.innerHTML = csvArray.length;
+                        console.log(csv.length);
+                        */
+                    }
+
+                    if ((document.getElementById('json').checked == false) && (document.getElementById('csv').checked == false) && (document.getElementById('xml').checked == false)) {
+                        document.getElementById('demo').innerHTML = "Select your file type and upload it.";
+                    }
+                });
+
+                reader.readAsText(files);
+                reader.send();
+
+            })
+        })
+
+
+    </script>
+</body>
+</html>

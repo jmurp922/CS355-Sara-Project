@@ -1,0 +1,110 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    
+</head>
+<body>
+    <input type="radio" name="files" value="Json" id="json">
+    <label for="json">JSON</label>
+    <input type="radio" name="files" value="CSV" id="csv">
+    <label for="csv">CSV</label>
+    <input type="radio" name="files" value="XML" id="xml">
+    <label for="xml">XML</label>
+    <form id="form">
+        <input id="fileUpload" name="fileUpload" type="file">
+        <button id="submit">upload</button>
+    </form>
+    <br />
+    <button id="clear" onclick="clearIt()">Clear Search</button>
+    <p id="demo"></p>
+    <div id="output">
+        <section id="hi">
+        </section>
+    </div>
+    <script>
+        var downloadJson;
+        let csvArray;
+        document.addEventListener("DOMContentLoaded", () => {
+            var form = document.getElementById("form");
+            var output = document.getElementById("output");
+            var content = ""; //"<section>";
+            form.addEventListener("submit", (event) => {
+                event.preventDefault();
+                var files = event.target.fileUpload.files[0];
+                var reader = new FileReader();
+                reader.addEventListener("load", () => {
+                    if (document.getElementById('json').checked == true) {
+                        var jsonFile = "JSON File Uploaded!";
+                        document.getElementById('demo').innerHTML = jsonFile;
+                        var parsedJson = JSON.parse(reader.result);
+                        var result = parsedJson.Result;
+                        result.map((data) => {
+                            var title = data.title;
+                            var url = data.url;
+                            var description = data.description;
+                            content += title + "<p>" + "<a href='" + url + "' target='_blank' >" + url + "</a></p>" + "<p>" + description + "</p>";
+                        });
+                        //content += "</section>";
+                        output.innerHTML = content;
+                    }
+                    else if (document.getElementById('xml').checked == true) {
+                        var xmlFile = "XML File Uploaded!";
+                        document.getElementById('demo').innerHTML = xmlFile;
+                        let xmlContent = '';
+                        let xmlFin = '';
+                        let xmlOutput = document.getElementById('demo');
+                        fetch(reader.result).then((response) => {
+                            response.text().then((xml) => {
+                                let parser = new DOMParser()
+                                let xmlDOM = parser.parseFromString(xmlContent, text / XMLDocument);
+                                let title = xmlDOM.querySelectorAll('title');
+                                let url = xmlDOM.querySelectorAll('url');
+                                let description = xmlDOM.querySelectorAll('description');
+                                xmlFin += title + url + description;
+                                output.innerHTML = xmlFin;
+                            })
+                        });
+                    }
+                    else if (document.getElementById('csv').checked == true) {
+                        var csvFile = "CSV File Uploaded!";
+                        document.getElementById('demo').innerHTML = csvFile;
+                        reader.readAsText(files);
+                        let data = files.event.Result;
+                        let duh = data.split(/\r\n|\n);
+                        for (let i = 0; i < duh.length; i++) {
+                            let row = duh[i].split(';');
+                            let col = [];
+                            for (let j = 0; j < row.length; j++) {
+                                col.push(row[j]);
+                            }
+                            csvArray.push(col);
+                        }
+                        output.innerHTML = csvArray.length;
+                        console.log(csv.length);
+                    }
+                    if ((document.getElementById('json').checked == false) && (document.getElementById('csv').checked == false) && (document.getElementById('xml').checked == false)) {
+                        document.getElementById('demo').innerHTML = "Select your file type and upload it.";
+                    }
+                });
+
+                reader.readAsText(files);
+                //reader.send();
+            })
+        })
+        function downloadFile(filename, text) {
+
+        }
+        function clearIt() {
+            console.log("okay...");
+            document.getElementById('hi').innerHTML = " ";
+            for (var i = 0; i < downloadJson.length; i++) {
+                console.log(downloadJson[i]);
+            }
+        }
+ 
+    </script>
+</body>
+</html>

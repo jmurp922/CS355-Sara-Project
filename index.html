@@ -1,0 +1,219 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <link rel="stylesheet" href="style.css">
+    <script async src="https://cse.google.com/cse.js?cx=017718281026447368856:sqlnlqdqcfu"></script>
+    <script>
+        /*
+        var reader1;
+        function parseFile() {
+            console.log("File recieved.");
+            const a = JSON.stringify(reader1);
+            console.log(a.result);
+        }
+        */
+        /*
+        window.onload = function () {
+            const input = document.querySelector('input[type="file"]');
+            input.addEventListener('change', function (e) {
+                console.log(input.files);
+                const reader = new FileReader();
+                reader.readAsText(input.files[0]);
+                reader.onload = function () {
+                    console.log(reader.result);
+
+                }
+
+               
+            }, false);
+  
+        }
+        */
+
+    </script>
+</head>
+<body>
+    <nav>
+        <div class="logoHeader">
+            <h1>SARA</h1>
+        </div>        
+        <ul class="navLinks">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="#srch">Search</a>
+                <ul>
+                    <li><a href="fromfile.html">From File</a></li>
+                    <li><a href="googleapi.html">From Google API</a></li>
+                    <li><a>SARA Search</a></li>
+                </ul>
+            </li>
+            <li><a href="courses.html">Course</a>
+                <ul>
+                    <li><a href="https://learn.zybooks.com/zybook/CUNYCSCI355TeitelmanFall2019">Zybook</a></li>
+                    <li><a href="https://www.tophat.com">Tophat</a></li>
+                    <li><a href="https://drive.google.com/drive/folders/1AsHhIFfQ3yNE_m2z4wswRfKh77K0UH9w">Google Drive</a></li>
+                    <li><a href="https://www.w3schools.com">W3Schools</a></li>
+                </ul>
+            </li>
+
+            <li><a href="about.html">About</a>
+                <ul>
+                    <li><a href="mailto:jmurp922@gmail.com">Contact Us</a></li>
+                </ul>
+            </li>
+            <li><a href="#browser">Browser</a>
+            <ul>
+                <li><a href="#navigator">Navigator</a></li>
+                <li><a href="#window">Window</a></li>
+                <li><a href="#screen">Screen</a></li>
+                <li><a href="#location">Location</a></li>
+                <li><a href="#geolocation">Geolocation</a></li>
+            </ul>
+            </li>
+        </ul>
+        <div></div>
+        <div></div>
+        <div class="burger">
+            <div class="1"></div>
+            <div class="2"></div>
+            <div class="3"></div>
+        </div>
+    </nav>
+
+    <div class="main">
+        <div>
+
+            <center>
+                <h3>SEARCH AND REPORTING APPLICATION<br /></h3>
+                <h2>
+                    <a href="googleapi.html">Google Search</a> | <a href="fromfile.html">File Search</a> | SARA Search
+                </h2>
+            </center>
+        </div>
+        <div>
+            </br> </br> </br>
+            <script>
+                function showBrowserInfo() {
+                    var x = document.getElementById("browser");
+                    if (x.style.display === "none") {
+                        x.style.display = "block";
+                    } else {
+                        x.style.display = "none";
+                    }
+                }
+
+            </script>
+            <center><button type="button" onclick="showBrowserInfo()">Browser Information</button></center>
+        </div>
+        <div class="browser" id="browser">
+            <center><h2>Browser Information</h2></center>
+            <script>
+                var browserInfo = navigator.appName;
+                var appInfo = navigator.appVersion;
+                var productInfo = navigator.product;
+                var platformInfo = navigator.platform;
+                var userAgent = navigator.userAgent;
+                var languageInfo = navigator.language;
+            </script>
+            <div class="navigator" id="navigator">
+                <h3>Navigator</h3>
+                Your browser is :
+                <script>document.write(browserInfo)</script><br />
+                Your app version is :
+                <script>document.write(appInfo)</script><br />
+                Your product info is :
+                <script>document.write(productInfo)</script><br />
+                Your user agent is :
+                <script>document.write(userAgent)</script><br />
+                Your platform is :
+                <script>document.write(platformInfo)</script> <br />
+                Your language is :
+                <script>document.write(languageInfo)</script>
+            </div>
+            <div id="window">
+                <script>
+                    var innerHeight = window.innerHeight;
+                    var innerWidth = window.innerWidth;
+                </script>
+                <h3>Window</h3> <br />
+                Your windows inner height is :
+                <script>document.write(innerHeight)</script><br />
+                Your windows inner width is :
+                <script>document.write(innerWidth)</script><br />
+
+            </div>
+            <div id="screen">
+                <script>
+                    var width = screen.width;
+                    var height = screen.height;
+                    var availWidth = screen.availWidth;
+                    var availHeight = screen.availHeight;
+                    var colorDepth = screen.colorDepth;
+                    var pixelDepth = screen.pixelDepth;
+                </script>
+                <h3>Screen</h3> <br />
+                Your screens height is :
+                <script>document.write(height)</script><br />
+                Your screens width is :
+                <script>document.write(width)</script><br />
+                Your screens availible height is :
+                <script>document.write(availHeight)</script><br />
+                Your screens availible width is :
+                <script>document.write(availHeight)</script><br />
+                Your screens pixel depth is :
+                <script>document.write(pixelDepth)</script><br />
+                Your screens color depth is :
+                <script>document.write(colorDepth)</script><br />
+            </div>
+            <div id="location">
+                <h3>Location</h3><br />
+                <script>
+                    var hypref = location.href;
+                    var hostName = location.hostname;
+                    var pathName = location.pathname;
+                    var prot = location.protocol;
+                </script>
+                The href is :
+                <script>document.write(hypref)</script><br />
+                The host name is :
+                <script>document.write(hostName)</script><br />
+                The path name is :
+                <script>document.write(pathName)</script><br />
+                The protocol is :
+                <script>document.write(prot)</script><br />
+
+            </div>
+            <div id="geolocation">
+    
+                <h3>Geolocation</h3><br />
+                <center><button type="button" onclick="getLocation()"> Get Geolocation</button></center>
+                <br />
+                <p id="demo"></p>
+            </div>
+
+
+        </div>
+    </div>
+ 
+    <script>
+        var x = document.getElementById('demo');
+        function getLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(showPosition);
+            } else {
+                x.innerHTML = "Geolocation is not supported by this browser.";
+            }
+        }
+
+        function showPosition(position) {
+            x.innerHTML = "Latitude: " + position.coords.latitude +
+                "<br>Longitude: " + position.coords.longitude;
+        }
+
+    </script>
+</body>
+</html>

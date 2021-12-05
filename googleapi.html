@@ -1,0 +1,202 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8" />
+    <title></title>
+    <link rel="stylesheet" href="style.css">
+    <script async src="https://cse.google.com/cse.js?cx=017718281026447368856:sqlnlqdqcfu"></script>
+</head>
+<body>
+
+    <nav>
+        <div class="logoHeader">
+            <h1>SARA</h1>
+        </div>
+        <ul class="navLinks">
+            <li><a href="index.html">Home</a></li>
+            <li>
+                <a href="#srch">Search</a>
+                <ul>
+                    <li><a href="fromfile.html">From File</a></li>
+                    <li><a href="googleapi.html">From Google API</a></li>
+                    <li><a>SARA Search</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="courses.html">Course</a>
+                <ul>
+                    <li><a href="https://learn.zybooks.com/zybook/CUNYCSCI355TeitelmanFall2019">Zybook</a></li>
+                    <li><a href="https://www.tophat.com">Tophat</a></li>
+                    <li><a href="https://drive.google.com/drive/folders/1AsHhIFfQ3yNE_m2z4wswRfKh77K0UH9w">Google Drive</a></li>
+                    <li><a href="https://www.w3schools.com">W3Schools</a></li>
+                </ul>
+            </li>
+
+            <li>
+                <a href="about.html">About</a>
+                <ul>
+                    <li><a href="mailto:jmurp922@gmail.com">Contact Us</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#browser">Browser</a>
+                <ul>
+                    <li><a href="#navigator">Navigator</a></li>
+                    <li><a href="#window">Window</a></li>
+                    <li><a href="#screen">Screen</a></li>
+                    <li><a href="#location">Location</a></li>
+                    <li><a href="#geolocation">Geolocation</a></li>
+                </ul>
+            </li>
+        </ul>
+        <div></div>
+        <div></div>
+        <div class="burger">
+            <div class="1"></div>
+            <div class="2"></div>
+            <div class="3"></div>
+        </div>
+    </nav>
+    <center>
+    <div class="main">
+        <center><h2>Google API Search</h2></center><br />
+        <div>
+            <a href="javascript:void(0);" class="icon" onclick="myFunction()"></a>
+        </div>
+        <form id="searchbar" onscroll="fixToTop()" class="example"
+ action="javascript:void(0);">
+            <input type="text" placeholder="Search" name="search">
+            <button type="submit">Search</button>
+        </form>
+        <div class="results">
+        </div>
+        <div class="save">
+            <h2>Download</h2>
+            <br />
+            <input type="radio" name="filesdl" value="Jsondl" id="jsondl">
+            <label for="jsondl">JSON Download</label>
+            <input type="radio" name="filesdl" value="CSVdl" id="csvdl">
+            <label for="csvdl">CSV Download</label>
+            <input type="radio" name="filesdl" value="XMLdl" id="xmldl">
+            <label for="xmldl">XML Download</label> <br /> <br />
+            <button id="download" onclick="download()">Download File</button>
+            <br><br>
+            <a style="display: none;" href="" id="a" download>Download file</a>
+        </div>
+        </center>
+</body>
+<script>
+    var searchButton = document.getElementById("searchbar");
+    searchButton.addEventListener("submit", function (e) {
+        search(searchButton.children[0].value);
+    });
+    var baseurl = "https://www.googleapis.com/customsearch/v1?key=AIzaSyBfFuw883\eP1MzJ3YYRvHk4Jyc2fawoq9w&cx=017718281026447368856:sqlnlqdqcfu&q=";
+    function search(searchTerm) {
+       /* if (request.status == 403) {
+            results.innerHTML("Too many searches done on the Google API for testing...");
+        }
+        */
+        var res = document.getElementsByClassName("results")[0].innerHTML = "";
+        var url = baseurl + searchTerm;
+        var request = new XMLHttpRequest();
+        request.open('GET', url, true);
+        request.onload = function () {
+            var data = JSON.parse(this.response);
+            if (request.status == 200) {
+                var results = document.getElementsByClassName("results")[0];
+                for (var i = 0; i < data["items"].length; i++) {
+                    var container = document.createElement("div");
+                    container.className = "result";
+                    var checkb = document.createElement("input");
+                    checkb.type = "checkbox";
+                    var link = document.createElement("a");
+                    link.href = data["items"][i].formattedUrl;
+                    link.innerHTML = data["items"][i].title;
+                    var url = document.createElement("p");
+                    url.className = "url";
+                    url.innerHTML = data["items"][i].formattedUrl;
+                    var desc = document.createElement("p");
+                    desc.className = "desc";
+                    desc.innerHTML = data["items"][i].snippet;
+                    var br = document.createElement("br");
+                    container.appendChild(checkb);
+                    container.appendChild(link);
+                    container.appendChild(url);
+                    container.appendChild(desc);
+                    container.appendChild(br);
+                    results.appendChild(container);
+                }
+            }
+        }
+        request.send();
+    }
+    function exportDL() {
+        if (document.getElementById('jsondl').checked == true) {
+            name = "export.json";
+            var results = document.getElementsByClassName("results")[0];
+            var indRes = results.children;
+            for (var i = 0; i < indRes.length; i++) {
+                if (indRes[i].children[0].checked) {
+                    var title = indRes[i].children[1].innerHTML;
+                    var url = indRes[i].children[2].innerHTML;
+                    var description = indRes[i].children[3].innerHTML;
+                    var result = { "title": title, "url": url, "description": description };
+                    resultsObject["Result"].push(result);
+                }
+            }
+            download(JSON.stringify(resultsObject), name, 'text/plain');
+        }
+        else if (document.getElementById('csvdl').checked == true) {
+            name = "export.csv";
+            var results = document.getElementsByClassName("results")[0];
+            var indRes = results.children;
+            var result = "";
+            for (var i = 0; i < indRes.length; i++) {
+                if (indRes[i].children[0].checked) {
+                    var title = indRes[i].children[1].innerHTML;
+                    var url = indRes[i].children[2].innerHTML;
+                    var description = indRes[i].children[3].innerHTML;
+                    title = title.replace(',', '');
+                    url = url.replace(',', '');
+                    description = description.replace(',', '');
+                    var result = result + title + ", " + url + ", " + description + "\n";
+                }
+            }
+            result = result.trim();
+            download(result, name, 'text/plain');
+        }
+        else if (document.getElementById('xmldl').checked == true) {
+            name = "export.xml";
+            var results = document.getElementsByClassName("results")[0];
+            var indRes = results.children;
+            var result = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<results>\n";
+            for (var i = 0; i < indRes.length; i++) {
+                if (indRes[i].children[0].checked) {
+                    var title = indRes[i].children[1].innerHTML;
+                    var url = indRes[i].children[2].innerHTML;
+                    var description = indRes[i].children[3].innerHTML;
+                    title = title.replace(',', '');
+                    url = url.replace(',', '');
+                    description = description.replace(',', '');
+                    var result = result + "<result>\n<title>" + title + "</title>\n" + "<url>" + url + "</url>\n" + "<description>" + description + "</description>\n</result>\n";
+                }
+            }
+            result += "</results>";
+            download(result, name, 'text/plain');
+        }
+        else {
+            console.log("Please select an option!")
+        }
+    }
+
+    function download(text, name, type) {
+        var a = document.getElementById("a");
+        a.style.display = "block";
+        var file = new Blob([text], { type: type });
+        a.href = URL.createObjectURL(file);
+        a.download = name;
+    }
+</script>
+</html>

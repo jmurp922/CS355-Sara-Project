@@ -1,0 +1,100 @@
+﻿body
+{
+    margin : 0px;
+    padding: 0px;
+    box-sizing : border-box;
+    font-family : Arial;
+    background-color : lightslategrey;
+}
+
+nav {
+    display : flex;
+    justify-content : center;
+    align-items : center;
+    min-height : 80px;
+    background-color : rebeccapurple;
+}
+
+.logoHeader {
+    color : cyan;
+    font-size : 18px;
+}
+.navLinks{
+    color : white;
+    display : flex;
+    justify-content : center;
+    width : 30%;
+    font-weight : bold;
+}
+
+.burger div {
+    width : 20px;
+    height : 3px;
+    background-color : cyan;
+    margin : 5px
+    
+}
+
+.main {
+    justify-content: center;
+    background-color: #606060;
+    color: white;
+    font-family: arial;
+    margin: 76px;
+    padding: 100px;
+    border: 100px;
+}
+
+@media screen and (max-width:768px){
+    .logoHeader{
+        justify-content :space-around;
+        left : 20px;
+        font-size : 16px;
+    }
+ 
+}
+ul {
+    margin : 0px;
+    padding : 0px;
+    list-style : none;
+}
+
+ul li {
+    background-color : black;
+    float : left;
+    width : 150px;
+    height : 40px;
+    opacity : .8;
+    line-height : 40px;
+    text-align : center;
+    font-size : 15px;
+}
+ul li a {
+    text-decoration :none;
+    color : white;
+    display : block;
+}
+ul li a:hover {
+    background-color : pink;
+}
+
+ul li ul li {
+        display: none;
+    }
+
+ul li:hover ul li {
+    display: block;
+}
+.browser {
+    display : none;
+    background-color : rebeccapurple;
+}
+div h3 {
+    text-align : center;
+}
+form {
+    justify-content : center;
+}
+h2 .search{
+    text-align : center;
+}
